@@ -1,11 +1,14 @@
 package com.example.scheduleproject.controller;
 
+import com.example.scheduleproject.dto.request.LoginRequestDto;
 import com.example.scheduleproject.dto.request.SignUpRequestDto;
 import com.example.scheduleproject.dto.request.UpdatePasswordRequestDto;
 import com.example.scheduleproject.dto.response.UserResponseDto;
 import com.example.scheduleproject.entity.User;
 import com.example.scheduleproject.service.ScheduleService;
 import com.example.scheduleproject.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +25,16 @@ public class UserController {
     public ResponseEntity<UserResponseDto> signUp(@RequestBody SignUpRequestDto requestDto) {
         User user = userService.signUp(requestDto.getUsername(), requestDto.getEmail(), requestDto.getPassword());
         return new ResponseEntity<>(new UserResponseDto(user), HttpStatus.CREATED);
+    }
+
+    // 로그인
+    @PostMapping("/login")
+    public ResponseEntity<Void> login(@RequestBody LoginRequestDto requestDto, HttpServletRequest request) {
+        User user = userService.authenticate(requestDto.getEmail(), requestDto.getPassword());
+
+        HttpSession session = request.getSession();
+        session.setAttribute("userId", user.getId());
+        return ResponseEntity.ok().build();
     }
 
     // 사용자 조회
