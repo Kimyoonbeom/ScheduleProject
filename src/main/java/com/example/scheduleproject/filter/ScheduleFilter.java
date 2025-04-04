@@ -22,7 +22,7 @@ public class ScheduleFilter implements Filter{
         log.info("Request URI: {}", requestURI);
 
         // 회원가입, 로그인
-        if (requestURI.equals("/api/users/signup") || requestURI.equals("/api/login")) {
+        if (requestURI.equals("/users/signup") || requestURI.equals("/login")) {
             chain.doFilter(request, response);
             return;
         }

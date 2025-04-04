@@ -56,7 +56,7 @@ public class UserController {
     // 비밀번호 변경
     @PatchMapping("/users/{id}/password")
     public ResponseEntity<Void> updatePassword(@Valid @PathVariable Long id, @RequestBody UpdatePasswordRequestDto requestDto){
-        scheduleService.updateSchedule(id,
+        userService.updatePassword(id,
                 requestDto.getOldPassword(),
                 requestDto.getNewPassword());
 

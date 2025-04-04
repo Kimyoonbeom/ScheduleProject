@@ -21,7 +21,7 @@ public class SignUpRequestDto {
 
     @NotBlank(message = "비밀번호를 입력하세요.")
     @Size(min = 8, max = 20, message = "비밀번호는 8자 이상 20자 이하여야 합니다.")
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\\\d)[A-Za-z\\\\d@$!%*?&]+$")
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d@$!%*?&]+$")
     // regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$" -> 8~20자리 숫자, 대소문자, 특수문자 포함.
     private final String password;
 
